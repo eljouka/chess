@@ -1,3 +1,5 @@
+import static java.lang.Math.abs;
+
 abstract class Piece {
     // make abstract
     public Tile tile;
@@ -18,7 +20,7 @@ abstract class Piece {
         catch (ArithmeticException e) {
             return false;
         }
-        return (dest.get_number() - this.tile.get_number()) / (dest.get_letter() - this.tile.get_letter()) == 1;
+        return abs(dest.get_number() - this.tile.get_number()) / abs(dest.get_letter() - this.tile.get_letter()) == 1;
     }
     public boolean updown(Tile dest) {
         return (dest.get_letter() == this.tile.get_letter());

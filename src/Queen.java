@@ -6,6 +6,7 @@ public class Queen extends Piece {
     }
     
     public boolean canMove(Tile dest) {
+        System.out.println("trying to move the queen diagonally: "+ super.diag(dest)) ;
         return (super.leftright(dest) ^ super.updown(dest) || super.diag(dest));
     }
 }

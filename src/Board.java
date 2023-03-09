@@ -23,8 +23,8 @@ public class Board {
                 board[0][i].placePiece(new Rook(true));
                 board[1][i].placePiece(new Knight(true));
                 board[2][i].placePiece(new Bishop(true));
-                board[3][i].placePiece(new King(true));
-                board[4][i].placePiece(new Queen(true));
+                board[3][i].placePiece(new Queen(true));
+                board[4][i].placePiece(new King(true));
                 board[5][i].placePiece(new Bishop(true));
                 board[6][i].placePiece(new Knight(true));
                 board[7][i].placePiece(new Rook(true));
@@ -33,8 +33,8 @@ public class Board {
                 board[0][i].placePiece(new Rook(false));
                 board[1][i].placePiece(new Knight(false));
                 board[2][i].placePiece(new Bishop(false));
-                board[3][i].placePiece(new King(false));
-                board[4][i].placePiece(new Queen(false));
+                board[3][i].placePiece(new Queen(false));
+                board[4][i].placePiece(new King(false));
                 board[5][i].placePiece(new Bishop(false));
                 board[6][i].placePiece(new Knight(false));
                 board[7][i].placePiece(new Rook(false));
