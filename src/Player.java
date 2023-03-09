@@ -10,6 +10,10 @@ public class Player {
         if (isLight) this.isTurn = true; // white goes first
     }
     
+    public boolean isSameColour (Piece piece) {
+        return this.isLight == piece.isLight;
+    }
+    
     
     
 }
