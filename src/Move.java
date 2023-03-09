@@ -9,6 +9,14 @@ public class Move {
         this.canEat = false;
     }
     
+    public void doMove(Piece piece, Tile dest) {
+        Tile old = piece.tile;
+        piece.tile.set_letter(dest.get_letter());
+        piece.tile.set_number(dest.get_number());
+        System.out.println("success");
+        old.removePiece(piece);
+        dest.placePiece(piece);
+    }
     public boolean isValidMove() { //TODO: make this private (will use internally, not by user)
         System.out.println("this.dest.getPiece() == null " + (!this.dest.isOccupied()));
         if (dest.get_letter() > 7 || dest.get_number() > 7) {
@@ -16,24 +24,24 @@ public class Move {
             return false;
         }
         if (!piece.canMove(dest)) { // if move doesn't follow piece's rule, automatic fail
-            System.out.println("this move is not allowed for this piece");
+            System.out.println("Failure: this move is not allowed for this piece");
             return false;
         }
         if (!this.dest.isOccupied()) {
-            Tile old = piece.tile;
-            piece.tile.set_letter(dest.get_letter());
-            piece.tile.set_number(dest.get_number());
-            System.out.println("success");
-            old.removePiece(piece);
-            dest.placePiece(piece);
+            if (piece instanceof Pawn) {
+                ((Pawn) piece).num_moves ++;
+            }
+            
+            doMove(piece, dest);
+            
             return true;
         }
         
         // eating a piece
         else {
             if (dest.getPiece().isLight != piece.isLight) { // just checking if not same colour
-                piece.tile.set_letter(dest.get_letter());
-                piece.tile.set_number(dest.get_number());
+                doMove(piece, dest);
+                
                 dest.removePiece(dest.getPiece());
                 System.out.println("ate");
                 this.canEat = true;
