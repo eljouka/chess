@@ -9,6 +9,7 @@ public class Game {
         Player player2 = new Player(false,"player2");
         
         Board myboard = new Board();
+        
         myboard.displayBoard();
         
         System.out.println("You are: Player1\nChoose your starting piece");
@@ -21,8 +22,8 @@ public class Game {
         int destLetter = new Scanner(System.in).nextInt();
         int destNum = new Scanner(System.in).nextInt();
         
-        Move mymove = new Move(myboard.board[startLetter][startNum].getPiece(),myboard.board[destLetter][destNum]); // trying to move knight
-        mymove.isValidMove();
+        Move mymove = new Move(myboard.board[startLetter][startNum].getPiece(),myboard.board[destLetter][destNum]);
+        mymove.move();
         myboard.displayBoard();
     }
 }

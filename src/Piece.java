@@ -12,7 +12,13 @@ abstract class Piece {
         this.tile = tile;
     }
     public boolean diag(Tile dest) {
-        return ((dest.get_number()-this.tile.get_number())/(dest.get_letter()-this.tile.get_letter())) == 1;
+        try {
+            int i = (dest.get_number() - this.tile.get_number()) / (dest.get_letter() - this.tile.get_letter());
+        }
+        catch (ArithmeticException e) {
+            return false;
+        }
+        return (dest.get_number() - this.tile.get_number()) / (dest.get_letter() - this.tile.get_letter()) == 1;
     }
     public boolean updown(Tile dest) {
         return (dest.get_letter() == this.tile.get_letter());

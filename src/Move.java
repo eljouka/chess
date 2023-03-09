@@ -17,16 +17,21 @@ public class Move {
         old.removePiece(piece);
         dest.placePiece(piece);
     }
-    public boolean isValidMove() { //TODO: make this private (will use internally, not by user)
+    public boolean move() { //TODO: make this private (will use internally, not by user)
         System.out.println("this.dest.getPiece() == null " + (!this.dest.isOccupied()));
         if (dest.get_letter() > 7 || dest.get_number() > 7) {
             System.out.println("destination out of bounds");
             return false;
         }
-        if (!piece.canMove(dest)) { // if move doesn't follow piece's rule, automatic fail
+        
+        // checking if it can move
+        // if pawn, checking if both move and eat
+            // if eat then wont go in this block and automatically goes to eat block
+        if (!piece.canMove(dest) || (piece instanceof Pawn && !piece.canMove(dest) && !((Pawn) piece).pawnEat(dest))) {
             System.out.println("Failure: this move is not allowed for this piece");
             return false;
         }
+        
         if (!this.dest.isOccupied()) {
             if (piece instanceof Pawn) {
                 ((Pawn) piece).num_moves ++;
@@ -40,9 +45,13 @@ public class Move {
         // eating a piece
         else {
             if (dest.getPiece().isLight != piece.isLight) { // just checking if not same colour
-                doMove(piece, dest);
+                if (!(piece instanceof Pawn) || ((Pawn) piece).pawnEat(dest))
+                    doMove(piece, dest);
+                else {
+                    System.out.println("pawn can't eat vertically");
+                    return false;
+                }
                 
-                dest.removePiece(dest.getPiece());
                 System.out.println("ate");
                 this.canEat = true;
                 return true;
